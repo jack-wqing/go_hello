@@ -1,0 +1,1236 @@
+Go语言：  GoLanguage 简写 Golang
+
+Go sdk安装mac应该使用 : go1.19.4.darwin-arm64.tar.gz	Archive	macOS	ARM64 对应 goland的版本
+
+Go方向：  Golang 核心编程
+
+    1、区块链研发工程师
+
+    2、Go服务器/游戏软件工程师
+
+    3、Golang分布式/云计算软件工程师
+
+应用：
+    区块链领域
+
+    后台服务应用
+
+    云计算和云服务应用
+
+Golang : gordon-金花鼠 🐿️
+
+    学习方法： 先框架 -> 在细节
+             know how -> know why
+
+1、 学习方法: 新技术和知识点 + 入门案例  + 新技术和细节 + 项目开发
+
+
+Go语言的诞生：
+    发明人: Ken Thompson(肯·汤普森)
+           Rob Pike(罗布·派克)
+           Robert Griesemer
+    为什么：现有语言没办法实现硬件优势
+           简洁高效+不能处理大并发
+           兼顾：高效，简洁开发
+
+    发展： 09年发布
+          15年的 1.5 移除了部分C代码
+
+    ** 特点：达到静态编译的安全和性能 + 又有动态语言开发维护的高效率 形容：go = c + python
+
+        1、C语言的一些特性：和C语言一样的 编译执行方式及弱化的指针、
+            指针的特点：
+
+        2、一如包的概念，一个文件都要归属与一个包
+        3、垃圾回收机制，内存自动回收，不需要开发人员管理
+        4、天然并发
+            从语言层面支持并发，实现简单
+            goroutine,轻量级线程，可实现大并发处理，高效利用多核
+            基于CSP并发模型（Communicating Sequential Process）实现
+        5、管道通信机制
+        6、可以返回多个值
+        7、新地创新， 如 slice、延迟执行defer
+
+
+    Golang：CSP并发模型 与 MPG调度模型
+
+
+.go文件执行方式：
+    go build  file.go对文件进行编译
+    file.exe 执行文件
+    go run file.go执行执行
+
+执行流程：
+    1、 .go文件  - go build -> 可执行文件 - 运行 -> 结果
+    2、 .go文件  - go run - 结果
+
+    exe可执行文件可以在没有go环境的机器运行 + go run运行源代码需要 go环境
+
+
+go注意事项：
+    1、源文件.go结尾
+    2、go执行入口为main()函数
+    3、Go严格区分大小写
+    4、go方法由一条条语句构建，每个语句后不需要加分号(GO语言回在每行后自动加分号)
+    5、go编译器是一行行进行编译的，因此一行只能写一条语句
+    6、go语言定义变量或者import包如果没有使用到，代码不能编译通过
+    7、大括号都是成对出现，缺一不可
+
+
+go转义字符：
+    \t  : 制表符
+    \n  ：换行符
+    \\  ： 表示 \
+    \"  :  表示 "
+    \r  ： 表示回车
+
+
+语法错误+文件路径错误
+
+注释：
+    行注释： //
+    块注释： /* */
+    使用细节：对于行注释和块注释，被注释的文字，不会被Go编译器执行
+            块注释里面不允许在有块注释嵌套
+
+规范的代码风格：
+    1、正确的注释和注释风格：推荐行注释
+    2、正确地缩进和空格
+       可以使用gofmt 格式化
+       运算符两边习惯添加空格
+    3、代码风格 代码块的写法
+       大括号开始括号，跟在语句后面，不支持换行开始 for i:=1;i<10;i++{
+
+    4、一行不超过80个字符， 超过使用换行符，保持格式优雅
+        "," 可以换行使用
+
+
+Golang官方编程指南：
+    https://golang.org
+
+API: Application Program Interface
+
+Golang标准库中文文档：
+    https://studygolang.com/pkgdoc
+
+GOPATH: 表示项目的工作目录
+
+
+Go中变量：
+    变量： 1、声明变量
+          2、赋值变量
+          3、使用变量
+        1、变量声明不赋值，使用默认值
+        2、根据值动态推导类型
+        3、省略var, 注意 := 左侧的变量不应该是已经声明过的变量，否则回导致编译错误
+        4、多变量声明
+        5、声明多变量，类型推导
+
+    全局变量：
+        函数外部声明的变量
+
+        该区域的数据值可以在同一类型内不断变化
+        变量在同一个作用域内不能重名
+
+        变量=变量名 + 值 + 数据类型
+        变会有默认值，int 为0  String 为空串
+
+    声明变量 - 初始化变量 - 赋值变量
+
+    操作服 + ： 同类型的数值型为相加，字符串为拼接
+
+go变量的数据类型：
+    数据类型：  基本数据类型： 数值型：整数类型(int, int8, int16, int32, int64, uint, uint8, uint16, uint32, uint64)
+                                     int uint是和具体的操作系统有关的 32系统32位，64系统64位
+                                     rune: 有符号，与int32一样，表示一个unicode编码
+                                     byte: 无符号，与uint8等价，当要存储字符时选用byte
+                                     注意：
+                                        1、分为有符号和无符号
+                                        2、默认时int类型
+                                        3、变量占用字节的大小
+                                 浮点类型(float32, float64)
+                                     浮点数：都是有符号数
+                                     精度可能有损失
+                                     精度范围不受OS的影响
+                                     默认为float64
+                                     表示方式：
+                                        十进制： 1.23  .56(0可以省略)
+                                        科学技术法：5.1234e2 == 5.1234 * 10 的 2 次方
+                                                  5.1234e-2 == 5.1234 / 10 的 2 次方
+                                     推荐使用float64
+
+                           布尔类型： bool
+                                    true false
+                                    占用 1byte
+                                    使用在逻辑运算
+
+                           字符型： 没有专门的字符型， 使用byte来保存单个字母字符
+                                    255依赖ASCLL码都可以使用byte保存
+                                    大于255的可以用 int大字节的类型存储
+                                     注意：字符 单引号
+                                     中文是Utf-8编码  utf-8是unicode编码一种实现
+                                     **Go语言是使用UTF-8的编码
+                                     UTF-8是unicode码的实现 英文字母是1byte  汉字3byte 字符可以进行运算，因为本质是unicode编码，运算是码值的运算
+                                     字符存储的是码值
+
+                           字符串：string(官方将string归属于基本类型)：是由字节组成
+                                    go字符串是那个字节连接的 是 UTF-8 编码的字符
+                                    Go语言中的字符都是 UTF-8 编码
+                                    Go中字符串是不可变的
+                                    字符串表现形式：双引号，回识别转义字符
+                                                 反引号，以字符串原生形式输出，可以防止攻击
+                                    字符串拼接方式: "+"  多行"+" 留在第一行操作
+
+                           基本数据类型默认值(零值)：
+                                整形+浮点数=0
+                                bool = false
+                                字符串 = ""
+
+                    基本数据类型的转换：
+                           不能自动转换，必须显示转换
+                           基本语法：T(v) 将值v转换为类型T
+                           Go中，数据类型可以 小->大  也可以 大->小
+                           被转换的是变量存储的数据（即值）， 变量本身的数据类型并没有变化
+                           转换中 int64转int8，编译不会报错，只是转换的结果是按溢出处理
+                           转换是数据范围内转换，否则结果是不确定的数
+
+                           引入了一个包暂时用不到，为了不报错，可以前面加一个 "_" 表示忽略
+
+                    基本数据类型 转 String
+                        1、var convertString string = fmt.Sprintf("%参数", 表达式)  参数需要和表达式的类型相匹配 回返回字符串
+                        2、使用 strconv包的函数
+                                FormatBool
+                                FormatFloat
+                                FormatInt
+                                FormatUint
+
+                    string 转 基本数据类型
+                        1、使用 strconv包中的函数
+                                ParseBool
+                                ParseInt
+                                ParseUInt
+                                parseFloat
+
+                       strconv: 字符串转换操作包
+                                多个值接受方式： 需要 "," 分割表示接受多个值
+                                string转基本类型：确保string可以转换为一个有效数据，否则会是默认值（零值）
+
+              派生/复杂数据类型：1、指针（Point）
+                                  1、基本类型存储的是值，也就是值类型
+                                  2、获取变量的地址 &i
+                                  3、指针类型，变量存储的是一个地址，这个地址指向的空间存储的才是值 var ptr *int = &num
+                                  4、获取指针类型所指向的值，使用：*， 如：var ptr *int, 使用*ptr 获取p指向的值
+
+                                  值类型，都有对应的指针类型，形式为 *数据类型，
+                                  值类型包括：int系列，float系列，bool, string, 数组和结构体struct  通常是栈
+                                  引用类型：指针、slice切片、map、channel、interface   通常是堆中分配
+
+                              2、结构体（struct）
+
+
+
+                              3、管道（Channel）
+
+                              4、切片（slice）
+
+
+                              5、数组
+                              6、map
+
+
+                              7、函数（也是一种类型）
+
+
+                              8、接口(interface)
+
+
+
+查看变量的类型：
+    fmt中的%T来输出类型
+    unsafe.Sizeof() 可以查看变量占用的字节
+
+
+Go常量：
+    常量使用const修饰
+    常量在定义的时候必须初始化
+    常量不能修改
+    常量只能修饰 bool 数值类型(int， float系列) string 类型
+    定义  const 常量名 [type] = value
+    iota的使用：
+        const(
+            a = iota
+            b
+            c
+        )
+        表示给a赋值为 0， b在a的基础上+1， c在b的基础上+1
+    作用域也是通过首字母大写决定的
+
+
+标识符： 规则
+    26英文字大小写  0-9  _ 组成
+    不能数字开头
+    严格区分大小写
+    不能是空格
+    下划线 _ ：本身就是表示标识符，表示：空标识符 作为占位符使用，不能使用
+    不能以系统的保留关键字作为标识符
+
+标识符使用规范和特点：
+    1、包名和所在的文件夹名称一致，不要和标准库冲突
+    2、变量名，函数名，常量名 -> 使用驼峰法
+    3、如果变量名、函数名、常量名首字母大写，则可以被其他包访问，如果首字母小溪，则只能在本包中使用（首字母大写是共有的，首字母小写是私有的）
+        引入包是从src开始的相对路径， pkgName.name 使用方式
+
+保留关键字和预定义标识符
+      25保留关键字
+      36预定义标识符：基本数据类型和内嵌函数
+
+
+运算符： 运算 赋值 比较
+
+    1、算数运算符
+        + - 正 负
+        + - 加 减
+        * / %  乘 除 取模   (负数取模的不同)
+        ++ -- 自增 自减
+        + 字符串加
+        取模整数舍去小数部分
+        取模：a / b = a-a/b*b
+        ++ -- 只能被当作一个独立语言使用， 不能：b := a++或 b := a--
+        **** ++ -- 只能独立使用  只能写在变量后面，不能写在前面 后++  后--
+
+
+    2、赋值运算符
+        将某个运算后的值，赋给某个变量
+        =    +=   -=   *=  /=  %=
+        <<=  >>=  &=   ^=  !=
+        运算顺序：从 右 -> 左
+
+
+    3、比较/关系运算符
+        比较结果为 bool + 主要用在if/for中
+        ==  !=  < >  <=  >=
+
+    4、逻辑运算符
+        比较结果为 bool + 也使用在 if/for
+        &&  ||  !  与  或   非
+        && 短路与
+        || 短路非
+
+    5、位运算符
+        &   ｜   ^    <<   >>
+        二进制 0，1     go中二进制不能直接使用 可以使用%b输出二进制
+        八进制 0-7      以0开头
+        十进制 0-9
+        十六进制： 0-9及A-F  a-f不区分大小写   以0x或者0X开头
+        <<: 左移运算符，符号位不变，低位补0
+        >>: 右移运算符，低位溢出，符号为不变，并用符号位补溢出的高位
+
+
+    6、其他运算符
+          &：类型   *：指针值
+
+    go中是没有三元运算符的：使用 if else 实现
+
+
+运算符优先级：
+    单目元算符，赋值运算符 从右向左
+    括号，++，-- -> 单目 -> 算术 -> 移位 -> 关系 -> 位 -> 逻辑 -> 赋值 -> 逗号
+
+
+键盘输入语句：
+    使用 fmt 包 操作：使用 fmt.Scanln() 或者 fmt.Scanf()
+
+
+程序流程控制：
+
+    1、顺序控制
+        程序逐行的执行，没有分支和循环，向前引用
+
+    2、分支控制
+        程序选择的执行
+            单分支 ： if
+                go支持在if语句条件位置声明一个变量直接在if作用域使用
+                if 必须需要大括号，即使一条语句
+
+            双分支 :  if else
+                else 不能定义变量 else需要紧跟上一行的大括号
+
+            多分支  if 、 else if 、 else
+                else if可以定义变量
+            嵌套分支不要超过三层
+            分支里面嵌套分支
+
+        switch分支结构
+                1、switch语句用于不同条件执行不同的动作，每一个case分支都是唯一的，从上到下逐一测试，直到匹配为止
+                2、匹配项后面不需要加 break
+                switch express{
+                    case value1, value2:
+                        语句块
+                    case value3, value4:
+                        语句块
+                    default:
+                        语句块
+                }
+                语句值 逗号 分割可以多个
+                语句块不需要加 break
+
+               switch细节讨论：
+                    1、case后是一个表达式（常量值、变量、一个有返回值的函数等都可以）
+                    2、case后各个表达式的值数据类型，必须和switch的表达式的值类型一致
+                    3、case后可以带多个表达式，使用逗号分割
+                    4、case后的表达式如果是常量值（字面量），则要求不能重复
+                    5、case后不需要带break, 程序匹配到一个case后就会执行对应的代码块，然后退出switch, 都匹配不到就会执行default的代码
+                    6、default语句不是必须的
+                    7、switch后也可以不带表达式，类似 if --else 分支来使用
+                    8、switch后也可以直接声明/定义一个变量，分号结束，不推荐
+                   注意：
+                    可以使用fallthrough 使得下一个case直接运行
+                    Type Switch: switch语句还可以被用于type-switch来判断某个interface变量中实际指向的变量类型
+
+    3、循环控制
+        语句可以按照条件循环的执行
+        for循环语法：     字符串的遍历，用切片  []rune:标识切片类型
+            for 循环变量初始化; 循环条件判断; 循环变量迭代 {
+                循环语句
+            }
+        细节：
+            循环条件返回一个 bool
+            for的第二种形式：
+                for 循环判断条件{
+                    循环语句
+                }
+            for第三种形式：死循环 借助break结束循环
+             for{
+                循环语句
+             }
+        for range的遍历方式  字符串时按照字符遍历
+            for index,val := range str/array{
+                fmt.Printf("index=%d, var=%c \n", index, val)
+            }
+
+        go语言没有while和do..while的语言
+          可以使用for实现while和do...while的效果
+          while效果
+          for{
+            if condition{
+             break;
+            }
+            代码语句
+          }
+          do...while效果
+          for{
+            代码语句
+            if condition {
+                break
+            }
+          }
+          编程：先易后难 + 先死后活
+
+          break:语句用于终止某个语句块的执行，用于中断当前for循环或者跳出switch语句
+          跳转控制语句 - break: 默认跳转最近的代码块
+          break:语句出现在多层嵌套语句块中时，可以通过标签指明要终止是那一层语句块
+                label1:
+                	for i := 0; i < 10; i++ {
+                		for j := 0; j < 10; j++ {
+                			fmt.Printf("i= %v, j= %v", i, j)
+                			break label1
+                		}
+                	}
+          continue: 结束本次循环，继续执行下一次循环
+                continue:语句出现在多层的循环嵌套语句体中时，可以通过标签指明要跳过的是那一层循环
+                label2:
+                	for i := 0; i < 10; i++ {
+                		fmt.Println("continue label i starting")
+                		for j := 0; j < 10; j++ {
+                			fmt.Println("continue label j starting")
+                			continue label2
+                			fmt.Println("continue label j end")
+                		}
+                		fmt.Println("continue label i end")
+                	}
+          goto: 无条件地转移到程序中指定的行
+                goto语句通常与条件语句配合使用，可以用来实现条件转移，跳出循环等
+                不建议使用goto语句，使用会造成理解和调试产生困难
+                for i := 0; i < 10; i++ {
+                		fmt.Println("goto i=", i)
+                		goto labelGoto
+                	}
+                labelGoto:
+                	fmt.Println("goto target label")
+          return: 使用在方法或者函数中，标识跳出所在的方法或者函数
+                  1、普通函数中，跳出函数
+                  2、main return标识终止程序，退出执行
+
+
+--------------------------------------------------------------------------------------------------
+函数：
+    原因：代码复用 + 代码维护
+    定义：程序指令的集合  自定义函数+系统函数
+    函数定义格式：
+        func 函数名(形参列表) (返回值列表){
+            执行语句..
+            return 返回值列表
+        }
+        可以没有返回值列表
+    函数的调用机制：
+        栈：一般是基本类型  堆：一般引用类型  代码区：存放的编译的代码
+        方法栈：和java的方法执行栈类似结构
+    方法的返回值方式 return和返回多个值
+    如果返回多个值，接受是如果希望忽略，可以使用 "_" 表示
+    如果返回一个值，（返回值列表）可以不用括号
+    注意点：
+        1、返回值可以是多个
+        2、返回的任意类型
+        3、命名规范，函数名首字母大写，可以被其包的函数使用，小写只能被本包使用
+        4、函数内的变量是局部的
+        5、基本类型和数组默认都是值传递，即进行拷贝，在函数内修嘎，不会影响到原来的值
+        6、如果希望函数内的变量能修改函数外的变量，可以传入变量的地址&， 函数内通过指针的方式操作变量
+        7、go函数不支持重载
+        8、函数也是一种数据类型，可以赋值给一个变量，该变量就是一种函数式的变量，可以通过变量使用函数
+        9、函数可以当作参数传递，然后调用
+        10、为了简化数据类型定义，Go支持自定义数据类型
+        11、支持对函数返回值命名
+            // 函数返回值也可以指定返回的名字
+            func myReturnName(n1 int, n2 int) (sum int, sub int) {
+            	sum = n1 + n2
+            	sub = n1 - n2
+            	return
+            }
+        12、使用下划线返回值
+        13、函数支持可变参数
+                args是slice, 通过args[index]可以访问到各个值
+        14、可变参数必须是，可变参数必须放在形参列表最后
+        注：形参也可以多个参数声明，类型统一使用
+
+       ***init函数：
+       定义：每一个源文件都可以包含一个init函数，该函数会在main函数执行前，被Go运行框架调用，init函数在main函数前调用
+       细节and注意事项：
+           1、如果一个文件同事包含变量定义，init函数，main函数，执行顺序：变量定义 -> init函数 -> main函数 当import的源文件有init导入的文件init先执行
+           2、init主要作用是初始化操作
+           3、import导入的文件具有init变量执行顺序： import 变量定义 -> import init函数 -> main 变量定义 -> main init函数
+       匿名函数：没有名字的函数
+           1、匿名函数直接使用
+                //1、定义命名函数，直接调用
+                niMingFunc := func(n1, n2 int) int {
+                    return n1 + n2
+                }(10, 20)
+                fmt.Printf("niminFunc: %v", niMingFunc)
+           2、匿名函数给变量，然后直接使用  函数里面定义函数，作用域为函数内部
+                subFunc := func(n1, n2 int) int {
+                    return n1 - n2
+                }
+                niMingVar := subFunc(1, 3)
+           3、全局命名函数，匿名函数赋值给全局变量，就可以全局使用
+                var (
+                	allLength = func(params ...int) int { // 这种情况不能使用 var funanme := func(){} 类型推断的方式
+                		return len(params)
+                	}
+                )
+
+    闭包：就是一个函数和与其他相关的引用环境组合的一个整体(实体)
+        返回的一个匿名函数，匿名函数和定义匿名函数函数内部变量组成了一个闭包
+        1、闭包是类，函数是操作，引用的包是字段， 函数和引用到的字段组成闭包
+        2、反复调用闭包的函数时，引用的变量只会初始化一次，因此每次调用都会基于变化的引用操作
+        闭包的好处：对于引用的变量重复使用，闭包可以只需要初始化一次(传入一次)，普通函数需要传入多次
+
+    函数中 - defer:
+        函数中创建资源(比如：数据库连接、文件句柄、锁等)，为了在函数执行后释放资源，Go可以使用defer(延迟机制)
+        注意点：
+            1、当执行到defer时， 会将语句压入独立的栈，暂时不执行
+            2、当函数执行完后，按照先入后出的方式执行
+            3、在defer将语句放入到栈时，也会将相关的值拷贝同时入栈
+         重要作用：对于资源的关闭
+            例子：connect = openDatabase()
+                 defer connect.close()
+
+    值传递： 传的是值拷贝   ： 基本类型int系列，float系列，bool, string, 数组和结构体struct
+    引用传递： 传的变量的地址拷贝 : 指针point 管道channel  切片slice  map  interface
+        注：地址拷贝效率要高，
+           希望值传递编程引用传递，传递变量的地址，修改值的方式 值传递->引用传递
+    变量作用域：
+        1、函数内部声明的变量就是局部变量，在函数内部
+        2、全局变量，作用为整个包，如果首字母大写的整个程序都有效
+        3、代码块中定义的变量，其作用域就是该代码块
+        4、全局变量和局部变量在使用的时候，会就近原则使用
+        5、全局变量不能使用 := 进行赋值操作：因为其隐藏着 声明和赋值两个操作，但是赋值语句不能在函数外操作，所以不能在全局使用
+
+
+
+包：go的每一个文件都是属于一个包的，就是说go是以包的形式来管理文件和项目目录结构的
+    包的本质就是文件夹
+    作用：
+        1、区分相同名字的函数、变量等标识符
+        2、当程序文件很多时，很好的管理项目
+        3、控制函数、变量等访问范围，即作用域
+    包的基本用法：package util
+    引入包： import "package path"
+    使用包的函数：package.funcName
+    包中的函数名首字母大写，标识public
+       小写不能被其他包使用
+    细节：
+        1、一个包对应一个文件夹，名称通常一致，不强制一致
+        2、其他包使用包的函数时，需要引入，可以分开，也可以合并引入
+        3、package指令在文件的第一行，然后是import指令
+        4、在import包时，路径是从$GOPATH 的src下开始，不用带src,编译器自动从src下开始引入
+        5、包中的函数首字母必须大写，别的包才能访问到
+        6、包中的变量要重用，首字母还是要大写
+        7、使用是，package.funcName/varName
+        8、可以给包起别名
+        9、同一个包，不能有相同的函数名
+        10、编译一个可执行文件，需要将这个包声明为main,即package main,语法规范
+            go build -o bin/my.exe go_code/project/main
+
+
+type关键字：可以给数据类型起别名, 起别名之后的类型和原来的类型是不同的类型，go认为是两种类型，可以进行显示类型转换
+    例如：type myInt int
+
+
+**** 内建函数 + 包函数
+
+Go字符串详解：
+    1、统计字符串的长度 len(str)
+    2、字符串遍历，同时处理中文的问题 r:=[]rune(str)
+    3、字符串转整数 n,err = strconv.Atoi("12")
+    4、整数转字符串 str = strcconv.Itoa(1234)
+    5、字符串 转 []byte : var bytes = []byte("hello go")
+    6、byte[] 转 字符串 ： str:=string([]byte{97,98,99})
+    7、10进制转2，8，16进制： str=strconv.FormatInt(123, 2) // 2->8->16
+    8、查找字串是否在指定的字符串中：strings.Contains("seafood", "foo") //true
+    9、统计一个字符串有几个指定的字符：strings.Count("cehease", "e") //4
+    10、不区分大小写的字符串比较(== 是区分字母大小写的)：fmt.Println(strings.EqualFold("abc", "Abc"))  //true
+    11、返回字串第一次出现的index值， 如果没有返回 -1: strings.Index("NLT_abc", "abc") //4
+    12、返回字串最后一次出现的index  strings.LastIndex
+    13、将指定的字串替换为另一个字串  strings.Replace("go go hello", "go", "go language", n) n表示希望替换几个，n=-1 表示全部替换
+    14、按指定的字符分割 string.Split("hello, world, go", ",")
+    15、字符串的字母进行大小写转换 strings.ToLower  strings.ToUpper()
+    16、将字符串左右两边的空格去掉  strings.TrimSpace(" long   ")
+    17、将字符串左右两边指定的字符去掉 strings.Trim("!value!", "!")
+    18、将字符串左边指定的字符去掉 strings.TrimLeft("! hello!", "!")
+    19、将字符串右边指定的字符去掉 strings.TrimRight("! hello!", "!")
+    20、判读字符串是否以指定的字符串开头 strings.hasPrefix("value", "va")
+    21、判断字符串是否以指定的字符串结尾 strings.hasSuffix("value", "ue")
+
+
+
+时间和日期相关的函数：相关的包是 time 包
+    1、time.Time类型，用于表示时间  time.Time
+    2、获取当前时间的方法  time.Now()
+    3、如果获取其它的日期  time.Now().Year() time.Now().Month() time.Now().Day() time.Now().Hour() time.Now.Minute()  time.Now.second()
+    4、格式化日期时间
+        1、fmt.Printf() 格式化操作
+        2、使用 time 提供的 time.Format("2016-01-02 15:04:05")
+    5、时间常量： time包中定义的常量
+        const ( //定义常量
+        	Nanosecond  = 1                  //纳秒
+        	Microsecond = 1000 * Nanosecond  //微妙
+        	Millisecond = 1000 * Microsecond //毫秒
+        	Second      = 1000 * Millisecond //秒
+        	Minute      = 60 * Second        //分钟
+        	Hour        = 60 * Minute        //小时
+
+        )
+
+    6、休眠函数 func Sleep(d Duration)  time.Sleep(100 * time.Millisecond)
+
+Go语言的内置函数（buildin）:直接使用
+    1、len
+    2、new 主要给值分配指定类型的内存，返回指向零值的指针, 使用需求：建立一个零值的值，返回地址
+    3、make 用来分配内存，主要用来分配引用类型，比如：chan slice map 等
+       创建：切片 管道 映射 map
+
+Go语言的错误处理：
+    系统发生错误：Panic(惊恐)， 报错
+        1、Go语言追求简单优雅， 所以，Go语言不支持传统的 try...catch..finally 处理的方式
+        2、Go中引入的处理方式为： panic, defer, recover
+        3、使用场景：Go中可以抛出一个panic的异常，然后在defer中，通过recover捕获整个异常，然后处理  defer + recover处理
+            defer func() {
+                    err := recover()
+                    if err != nil {
+                        fmt.Println("err=", err)
+                    }
+                }()
+    自定义错误：
+        Go中允许自定义错误，使用errors.New和panic内置函数
+        1、error.New("错误说明")、回返回一个error类型的值，表示一个错误
+        2、panic内置函数，接受一个interface() 类型的值(也就是任意值) 作为参数， 可以接受error类型的变量，输出错误信息，并退出程序
+            func readConf(name string) (err error) {
+            	if name == "conf.ini" {
+            		return nil
+            	} else {
+            		return errors.New("读取文件失败")
+            	}
+            }
+
+            func test01(name string) {
+            	err := readConf(name)
+            	if err != nil {
+            		panic(err)
+            	}
+            	fmt.Println("test01 自定义代码继续执行 name:", name)
+            }
+
+
+
+Go语言的数组：
+    数组是可以存放多个同一类型数据，数组也是一种数据类型，在Go中，数组是值类型
+    定义： var 数组名 [数组大小]数据类型
+    数组内存布局：数组的地址，就是数组第一个元素的，元素各个地址通过数组类型都是相加的
+    数组初始化的方式：
+        var arr [3]int = [3]int{1, 2, 3}
+        var arr1 = [3]int{4, 5, 6}
+        var arr2 = [...]int{7, 8, 9}
+        var arrStr = [3]string{1: "tom", 2: "jack", 0: "jerry"}
+    for range遍历数据
+        基本语法：
+            for index, value := range arrayData{
+                操作语句
+            }
+    数组的细节 + 注意点：
+        1、数组是多个相同类型的数据集合，数组定义之后，数组长度是固定的，不能动态变化
+        2、var arr []int arr是切片，不是数组
+        3、数组的元素可以是任意类型，可以是值类型也可以是引用类型，但是不能混用
+        4、数组创建后，没有赋值，就都是零值  数值类型为0 字符串为"" bool为false
+        5、步骤：1、声明数组并开辟空间 2、给数组各个元素赋值(默认值)， 3、使用数组
+        6、数组下标0开始
+        7、数组下标必须是可用范围内
+        8、Go的数组是值类型，默认是值传递，进行值拷贝，数组间不受影响
+        9、想在其他函数修改函数，可以进行引用传递（指针的方式）
+        10、长度是数组的一部分，传递函数参数时，需要考虑数组长度
+
+Go语言的切片 slice：
+     切片接单理解为动态数组：可以理解为Java的list，长度可以动态变化
+     定义：1、切片是数组的一个引用，因为切片是引用类型，在进行传递时，遵循引用传递的机制  切片的数据结构像结构体
+          2、切片的使用和数组类似，遍历切片，访问切片的元素和求切片长度len(slice)都是一样的
+          3、切片的长度是可以变化的，因此切片是一个可以动态变化数组
+          4、切片的定义格式：
+                var 变量名 []类型 ：例如：var a []int
+            slice是一个数据结构struct: 有三部分：1，ptr* 指向切片的起点地址， len:元素个数  cap:切片容量
+            type slice struct{
+                var ptr *[2]int
+                var int len
+                var int cap
+            }
+
+     ***切片必须要make之后使用
+
+     切片使用的三种方式：
+        1、定义一个切片，然后让切片区引用已经创建好的数组
+            var intArr [5]int = [...]int{1, 22, 33, 66, 99}
+        2、通过make来创建切片
+            var 切片名称 []类型 = make([]数据类型， len, [cap])
+            var makeSlice []int = make([]int, 4, 10)  //第一个切片类型， 第二个长度len, 第三个是容量
+            make创建的切片数组是不可见的，由 make 维护
+        3、创建切片，直接指定数据，类似与make的方式
+            var sliceInit []int = []int{1, 2, 3}
+
+        切片也可以使用 for、for range两种遍历方式
+     使用细节：
+       1、长度只能是len
+       2、引用数组的写法
+            var slice = arr[0:end] or arr[:end]
+            var slice = arr[start:len[arr]]  or arr[start:]
+            var slice = arr[0:len[arr]] 简写为 arr[:]
+       3、切片也可以通过切面而来
+       4、cap是一个内置函数
+       5、切片定义完成之后，必须使用 数组引用或者make初始化一个切片
+       6、切片可以继续切片
+     切片的自动增长：
+        1、使用append内置函数，可以对切片进行动态追加
+           slice = append(slice, 10, 20, 30) 切片动态添加元素
+           var a = []int{1, 2, 3}
+           slice = append(slice, a...) 切片动态添加切片
+        2、append底层原理
+           1、切片append操作的本质就是对数组的扩容
+           2、go底层回创建一个新的数组newArr(安装扩容后的大小)
+           3、将slice原来包含的元素拷贝到新的数组newArr
+           4、slice重新引用newArr
+           5、newArr是底层维护的，程序员不可见
+        3、切片的拷贝操作：copy
+           copy(slice, a) 将切片a拷贝到slice + 必须都是切片类型
+           切片拷贝数据空间是独立的
+           切片拷贝容量可以不一致，不会报错
+           slice传递是引用类型，保持操作
+     string和slice:
+        1、string底层是byte数组，因此string也可以进行切片处理
+        2、string和切片内存形式
+        3、string是不可变的，不能通过索引修改
+        4、修改字符串，可以通过string -> []byte 或者 []rune -> 修改 ->转成字符串
+
+Go二维数组：
+    定义: var 数组名 [大小][大小]类型
+         声明初始化： var 数组名 [大小][大小]类型 = [大小][大小]类型{{初值...},{}...,{}}
+
+
+Go中Map:
+    简单定义：key-value的数据结构
+    基本语法：var map变量名 map[keyType]valueType
+            keyType:可以是多种类型：bool, 数字，string,指针，channel，包含前面类型的 接口 结构体 数组，通常为int、string
+            注：slice、map和function不可以，没法用 == 比较
+            valueType: 的类型和keyType为一样的
+                通常为：数字，string, map, struct
+            **** : 声明是不会分配内存的，初始化需要make，分配内存后才能赋值和使用
+            案例：var aMap map[string]string         //声明
+               	 aMap = make(map[string]string, 10) //分配内存
+               	 aMap["a"] = "a-value"
+    使用方式：//第一种使用方式
+         	var map1 map[string]string
+         	map1 = make(map[string]string, 4)
+         	map1["key1"] = "value1"
+         	//第二种使用方式
+         	map2 := make(map[string]string, 4)
+         	map2["key-map2"] = "value-map2"
+         	//第三种使用方式
+         	var map3 = map[string]string{"key1-map3": "value3-map3"}
+    map的crud:
+          新增修改：直接赋值，没有新增，有进行修改
+          删除：使用 delete 内置函数根据传入的key进行删除， 遍历删除，是原来成为垃圾，被gc进行回收
+          查询: 直接通过 key进行访问
+                val, findRes := map1["key1"] // val 表示找到的值  findRes表示是否找到来，true or false
+    map的遍历：使用 for range来进行遍历
+            for key, value := range map1 {
+           		fmt.Printf("key:%v, value:%v \n", key, value)
+           	}
+    map的len:
+            使用内置len可以统计出 map种有多少对key-value
+    map的切片：
+            map切片其中的个数可以动态的变化,切片的分支就是数组的引用
+            增长：
+                var mapSlice []map[string]string = make([]map[string]string, 2)
+                newEle := make(map[string]string)
+                mapSlice = append(mapSlice, newEle)
+    map排序：
+           先对key进行遍历，放入到切片中，然后使用sort排序包，对key进行排序，循环输出map的值
+    map使用细节： map中放置的是统一类型
+        1、map是引用类型，遵循引用类型的使用方式
+        2、map的容量达到后，在想map增加元素，回自动扩容，并不会发生panic,map能自动增长键值对，切面的容量达到后，不能在增加
+        3、map的value也经常使用struct类型，更适合管理复杂的数据
+
+-----------------------------------------------------------------------------------------------------------------------
+
+Go语言的面向对象编程：
+
+    面向对象：
+        1、Go语言不是纯粹的面向对象的语言，Go支持面向对象编程特性
+        2、Go没有class,Go通过struct来实现OOP特性
+        3、Go面向对象编程很简洁，去掉来传统OOP语言的：继承，方法重写，构造函数和析构函数，隐藏的this指针特性等等
+        4、Go仍然具有继承、封装、多态的特性，实现的方式不同，如：继承不是extends，而是通过匿名字段来实现
+        5、Go面向对象很优雅，OOP本身是语言类型系统的一部分，通过接口（interface）关联，耦合性低，非常灵活,Go中面向接口编程的特性
+
+
+    结构体：   go结构体是值类型
+        结构体(数据类型) -> 结构体变量(实例/对象/变量)
+        定义：
+           type 结构体名称 struct{
+                field1 type
+                field2 type
+           }
+        结构体字段 - 属性 - field
+        结构体变量声明方式：结构名为Cat
+            1、var name Cat
+            2、var name Cat = Cat{}
+            3、var name *Cat = new(Cat)
+            4、var name *cat = &Cat{}
+        字段可以是基本类型，也可以是引用类型，基本类型都是有零值的 引用类型零值是nil(fmt输出可能不是nil是别的内容)
+        不同结构体变量的字段是相互独立的，互补影响，一个结构体变量赋值给另一个是值拷贝，修改不影响
+        指令使用：new进行赋初值，make给切片和map赋初值 ->之后才能使用
+        访问指针的结构体：
+            可以直接 struct.field:底层会自动添加取值操作符 "*"
+            指针操作，"*"需要和变量"()"起来， "."操作符级别比"*"高
+
+    结构体的使用细节和注意事项：
+        1、结构体中所有的字段内存中是连续的
+        2、结构体是用户单独定义的类型，结构体互相转换时需要有完全相同的字段(名称、个数、类型)
+        3、结构体进行type重新定义(相当于别名)，Golang认为是新的数据类型，但是相互间可以强转
+        4、struct的每个字段上，可以写上一个tag,该tag可以通过反射机制获取，常见的使用场景就是序列化和反序列化
+            type Monster struct {
+            	Name  string `json:"name"` //结构体的标签
+            	Age   int    `json:"age"`
+            	Skill string `json:"skill"`
+            }
+            json对类型转换
+
+    Go语言的方法：
+        Golang中的方法是作用在指定的数据类型上的(即:和指定的数据类型绑定)，因此自定义类型，都可以有方法，不仅仅是struct
+        方法定义：
+            func (receiver type) methodName(参数列表)(返回值列表){
+                方法体
+                return 返回值
+            }
+
+        例：type A struct {
+                Num int
+            }
+            func (a A) test() {
+                fmt.Println("A.num=", a.Num)
+            }
+        方法的调用和传参机制原理： 方法传参，调用变量地址和值可以动态检测，具体看方法绑定的形式方法
+            1、方法的调用和传参机制和函数基本一致，但是会将调用方法的变量，当作实参也传递给方法
+            2、变量类型，传递的参数：值拷贝和引用拷贝
+
+        方法的注意事项和细节讨论：
+            1、结构体类型是值类型，方法调用中，遵守值类型的传递机制
+            2、希望修改结构体变量的值，可以通过结构体指针的方式来处理
+            3、方法作用在指定的数据类型上(即和指定的类型绑定)，自定义类型，都可以有方法，而不仅仅是struct, 比如int, float32等都可以有方法
+            4、方法的访问范围和函数一样，通过首字母是否大写判断
+            5、如果一个变量实现例String()方法，fmt.Println默认会调用这个变量String()进行输出
+        方法和函数的区别：
+            1、调用方式不同
+            2、对于普通函数，接受者为值类型时，不能将指针类型的数据直接传入，反之亦然
+            3、对于方法，接受者为值类型时，可以直接用指针类型的变量调用方法，反过来同样也可以
+
+面向对象的应用实例：
+       1、声明结构体，确定结构体名
+       2、编写结构体字段
+       3、编写结构体的方法
+
+       创建结构体变量的时候，直接赋值
+        var a1 A = A{Num:12} // 赋值的时候可以指定参数名
+        Go没有构造函数 和 析构函数：使用工厂模式解决 -> 结构体没有外部作用域
+        工厂模式：
+            func NewTeach(name string, age int) *teach {
+            	return &teach{name, age}
+            }
+
+    抽象：思想
+
+    面向对象的特性：封装、继承、多态
+        封装：字段和字段的操作分装在一起，对字段的操作，只能通过方法进行操作
+            字段的分装和包的分装
+        封装方式：
+            1、结构体字段首字母小写
+            2、提供工厂函数
+            3、属性的get set
+            Go对封装的含义进行的弱化
+        -----------------------------------------------------------
+        三大特性：
+            继承：Go实现继承的方式: 解决代码重用，靠近人类思维
+                 Go解决方式：匿名结构体
+            Go中：如果一个struct嵌套了另外一个匿名结构体，那么这个结构体就可以直接访问匿名结构体的字段和方法
+            基本语法：
+              type Goods struct{
+                Name string
+                Price int
+              }
+              type Book struct{
+                Goods
+                Writer string
+              }
+              var book Book = Book{Goods{Name: "西游记", Price: 12}, "吴承恩"}
+              book.Name = "三国"
+              book.Price = 12
+              book.Writer = "..."
+            继承的深入讨论：
+                1、嵌入的匿名结构体，不管首字母大小写
+                2、字段访问可以简化，直接点，不用加匿名结构体名
+                3、结构体和匿名结构体有相同的字段或者方法时，编译器采用就近访问原则，如果希望访问匿名结构体，可以添加匿名结构体名称来区分
+                4、一个结构体嵌入多结构体，当嵌入的多个结构体有相同的属性和方法，访问的时候必须带有匿名结构体的名称，否则回报错
+                5、如果一个struct嵌套一个有名的结构体，该中模式是组合，如果是组合关系，访问组合的结构体字段时，必须带上结构体的名字
+                   diary := Diary{good: Goods{"haha", 12}, Address: "www"}
+                6、嵌入来匿名结构体，可以在创建结构体变量是直接赋值
+                   var book Book = Book{Goods{Name: "西游记", Price: 12}, "吴承恩"}
+                注：
+                    结构体也可以有匿名基本类型，但是只能有一个
+                多重继承：尽量不要使用多重继承
+
+            ------------------------------------------------------------------------
+            Go中的接口：面向接口编程
+                多态：通过接口实现的
+                接口：
+                    介绍：interface可以定义一组方法，interface不能包含任何变量，到某个自定义类型的时候，根据情况实现这些方法
+                    基本语法：
+                        type 接口名 interface{
+                            method1(参数列表) 返回值列表
+                            method2(参数列表) 返回值列表
+                        }
+                    自定义类型：
+                        func (t 自定义类型) method1(参数列表) 返回值列表{
+                            方法实现
+                        }
+                        func (t 自定义类型) method2(参数列表) 返回值列表{
+                            方法实现
+                        }
+                    注：1、接口方法都没有实现，接口体现多态和高内聚低耦合
+                       2、Go中接口不需要显示的实现，只需要一个变量，含有接口类型中的所有方法，那么这个变量就实现来该接口，Go中没有implement关键字
+
+                接口注意事项和实现细节： 是通过方法判断是否实现了接口，如果多个接口方法都相同，则相当于实现了多个接口
+                    1、接口本身不能创建实例，但是可以指向一个实现该接口的自定义类型的变量(实例)
+                    2、接口中所有的方法都没有方法体
+                    3、一个自定义类型实现来接口的所有方法，说这个自定义类型实现来接口
+                    4、一个自定义类型只有实现来接口，才能将自定义类型的实例赋值给接口
+                    5、只要是自定义类型都可以实现接口，不仅仅是结构体
+                    6、一个自定义类型可以实现多个接口
+                    7、Golang接口中不能有任何变量
+                    8、一个接口可以继承多个别的接口，这时如果先实现该接口，需要实现全部方法
+                        type CInterface interface {
+                        	AInterface //接口的继承，也是直接匿名引入的方式，和结构体的继承是一样的
+                        	BInterface
+                        	Test03()
+                        }
+                    *9、interface类型默认是一个指针(引用类型)，没有对interface初始化就使用，会输出nil, 多个接口继承，不能有相同的方法
+                    *10、空接口 interface{} 没有任何方法，所有的类型都实现了空接口
+                        type T interface {
+                        }
+                    自定义类型绑定方法时，注意看使用时是普通还是指针，如果时指针操作接口需要时地址，普通同类型就是简单定义的类型
+
+
+                接口和继承的区别：
+                    接口是扩展， 继承是一个功能类继承体系
+                    1、结合和继承解决的问题不同
+                        继承的价值：解决代码的复用性和可维护性
+                        接口的价值：代码编程规范
+                    2、接口比继承更加灵活
+                    3、接口一定程度上实现代码解耦
+                Go多态：
+                    Go多态是通过接口实现的
+                    1、多态参数
+                    2、多态数组
+
+---------------------------------------------------------------------------------------------------------------
+类型断言：
+    接口是一般类型，不知道具体类型，转成具体类型，需要使用类型断言
+        例：b = a.(Point) // 表示类型断言， 类型之间进行转换
+    进行类型断言的时候，不匹配会panic
+    类型断言检测机制：如果成功就转换，否则也不panic
+        var i, ok = a.(int)
+        if ok { // 表示断言成功， 转换成功
+            fmt.Printf("convert success: i value : %v \n", i)
+            fmt.Printf("a type: %T \n", a)
+        } else {
+            fmt.Println("转换失败")
+            fmt.Printf("a type: %T not convert int \n", a)
+        }
+        switch a.(type) { //a.(type) 只能使用在switch
+
+        }
+
+--------------------------------------------------------------------------------------------------------------
+Go中的文件操作：操作文件的两个包：os  bufio  io 等包的操作
+    流：输入流 + 输入流
+    struct: os.File
+    读文件操作：
+        1、打开一个文件
+           os.Open(name string)(*File, error)
+        2、关闭一个文件
+           File.close()
+        3、读取文件内容并显示在终端(带缓冲区的方式)，os.Open, file.Close, bufio.NewReader(), reader.ReadString 函数和方法
+           File -> Reader (reader := bufio.NewReader(file))  通过reader的方法进行读取文件内容
+        4、读取文件内容并显示在终端(os.ReadFile一次将整个文件读入到内存中)，适用于文件不大的场景(os.ReadFile)
+           dataByte, err1 := os.ReadFile("src/fileoperator/main/1.txt")
+    写文件操作：
+        1、fun OpenFile(name string, flag int, perm FileMode)(file *File, err error)
+           openFile会使用指定的选项和指定的模式打开指定的文件，如果错误底层错误是 *PathError
+        2、使用带缓存的方式写文件
+           bufio.NewWriter(file), *Writer的方法WriterString完成上面的任务
+           writerFile, err2 := os.OpenFile("src/fileoperator/main/2.txt", os.O_CREATE|os.O_WRONLY, 0777)
+           writer := bufio.NewWriter(writerFile)
+           writer.WriteString("hello new Writer")
+           writer.Flush() // 缓存中的内容需要刷盘
+           writerFile.Close()
+    判断文件或者文件夹是否存在：
+        1、Go判断文件或者文件夹是否存在的方法为os.Stat()函数返回的错误值进行判断
+            1、返回nil，说明文件或者文件夹存在
+            2、如果返回的错误类型使用 os.isNotExist()判断true，说明文件或文件夹不存在
+            3、返回的错误为其它类型，则不确定是否存在
+    文件拷贝：
+        1、使用io包的 func Copy(dst Writer, src Reader)(written int64, err error)
+            需要关闭文件句柄
+
+-------------------------------------------------------------------------------------------------------------------
+命令行参数：
+    os包中的 os.Args是一个string的切片，用来存储所有的命令行参数：
+        os.Args：存储命令行参数 go build 编译之后，执行的时候 or go run 执行的时候 后面的字符串顺序依次顺序参数放入到数组
+    flag包解析命令行参数：参数书写的顺序不影响
+        解析像mysql参数样式：解析指定的命令行参数格式
+        flag可以直接解析os.args中的参数
+            var user string
+        	// &user表示接受用户 -u 后面输入的参数值
+        	flag.StringVar(&user, "u", "", "用户名默认为空")
+        	//必须在所有flag都注册好而未访问其值时执行
+        	flag.Parse()
+
+------------------------------------------------------------------------------------------------------------------------
+JSON:(JavaScript Object Notation)轻量级的数据交换格式，主流数据格式
+    Json的使用：数据的传输格式
+    1、json序列化：
+        1、结构体
+            marshal, err := json.Marshal(monster)
+            *序列化结构体的时候具有tag标签：
+                可以使用在结构使用tag标签改变序列化之后key的名字
+                例：type Monster struct {
+                  	Name     string  `json:"name"`   //反射机制
+                  	Age      int     `json:"age"`
+                  	Birthday string  `json:"birthday"`
+                  	Sal      float64 `json:"sal"`
+                  	Skill    string  `json:"skill"`
+                  }
+        2、map
+            var mapData map[string]interface{} = make(map[string]interface{})
+            mapData["name"] = "红孩儿"
+            mapData["age"] = 123
+            mapJson, err1 := json.Marshal(mapData)
+        3、切片
+            var sliceData []map[string]interface{}
+            var sm1 = make(map[string]interface{})
+            sm1["name"] = "西施"
+            sm1["age"] = 20
+            sm1["monster"] = monster
+            sliceData = append(sliceData, sm1)
+            sliceJson, err3 := json.Marshal(sliceData)
+    2、json反序列化
+        err4 := json.Unmarshal(sliceJson, &sliceData)  //使用 json.Unmarshall 进行反序列化
+        类型值得是字段一致
+---------------------------------------------------------------------------------------------------------------------
+单元测试：
+    1、传统测试
+        1、不方便
+        2、不利于管理
+    2、单元测试：testing 测试框架
+        testing: Go语言自带的轻量级测试框架testing 和 自带go test命令来实现单元测试和性能测试， 测试用例 + 压力测试
+        执行过程：1、go test -v
+                2、寻找_test结尾的go文件
+                3、寻找Test文件开头的方法(方法参数为 t *testing.T)
+    单元测试的细节：
+        1、测试用例的文件名必须 _test结尾
+        2、测试函数必须是Test开头，一般是Test+被测试的函数名
+        3、测试函数的参数为(t *testing.T)
+        4、一个测试文件可以有多个测试用例函数
+        5、运行用例命令
+            go test:如果运行正确，无日志，错误时，会输出日志
+            go test -v (运行正确或者错误，都输出日志)
+        6、当出现错误时，可以使用t.FatalF来格式化输出信息，并退出程序
+        7、t.Logf方法可以输出相应的日志
+        8、测试用例文件并没有main函数
+        9、PASS表示测试用例运行成功，FAIL表示测试用例运行失败
+        10、单个文件测试，一定带上被测试的源文件
+            go test -v cal_test.go cal.go
+        11、测试单个方法
+            go test -v -test.run TestAddUpper
+
+----------------------------------------------------------------------------------------------------
+goroutine and channel: 协程 和 管道
+    进程：是系统进行资源分配和调度的基本单位
+    线程：是程序独立执行的最小单元
+         一个进程可以有多个线程， 一个程序至少有一个进程，一个进程至少有一个线程
+         并发 + 并行
+    协程：用户态线程
+    Go协程(goroutine)和主线程：
+        Go主线程：一个Go线程上，可以起多个协程(协程是轻量级的线程)
+        Go协程的特点：
+            1、有独立的栈空间
+            2、共享程序堆空间
+            3、调度由用户控制 *******
+            4、协程是轻量级的线程
+        使用 go关键字启动线程，通常是 go function()启动
+        协程的生命周期最多为主线程的生命周期
+        总结：
+            1、Go主线程是作用在cpu上的，是重量级的
+            2、协程从主线称开启的，轻量级的线程，逻辑太，资源消耗相对小
+            3、Golang协程机制，使的Go可以开启上万协程，所以具有高并发的优势
+
+    1、MPG模型：
+        1、M: 操作系统的主线线程
+        2、P: 协程执行需要的上下文
+        3、G: goroutine协程
+        cpu数目： 1.8版本后，自动设置
+            numCpu := runtime.NumCPU() // 获取cpu的数
+            runtime.GOMAXPROCS(numCpu) // 设置go 使用的最大cpu数
+        Go对map的并发操作，要使用 sync.Map操作 可以通过 go build -race 来编译检测
+    2、协程之间的通信
+        1、全局变量加锁同步
+            低层次的线程同步的方式
+            缺点：枷锁位置不好控制，线程交互等待，不好设置等待时间
+        2、channel
+            1、channel本质是一中数据结构-队列
+            2、数据是先进先出的
+            3、线程安全，多goroutine访问时，不需要枷锁，channel本身是线程安全的
+            4、channel是有类型的一个string的channel只能存放string类型的数据
+        3、channel介绍
+            定义：var 变量名 chan 数据类型
+             例：var intChan chan int = make(chan int, 3)
+                intChan <- num     // 写数据
+                num1 := <-intChan  // 读数据
+             说明：
+                1、channel是引用类型
+                2、channel必须初始化才能写入数据，即make后才能使用
+                3、管道是有类型的，只能写入声明的数据类型
+                4、channel 放满后不能在放了
+                5、数据取出后能够在放
+                6、数据取完后不能再取
+                操作的时候一定得注意go的数据类型，强的数据类 -- 要注意编译环境 + 运行环境，类型断言类型转换
+        4、channel的关闭：
+             使用内置close可以关闭channel,当channel关闭后，不能在向channel写数据，但是仍然可以读数据
+        5、channel的遍历：
+             for range遍历管道：
+                1、在遍历时，如果channel没有关闭，则会出现deadlock的错误
+                2、在遍历时，如果channel已经关闭，会正常遍历，遍历完成，退出程序
+             遍历管道时：不要使用普通的 for，长度会变化
+        6、channel使用的方式：
+               如果一个channel只写没有读：fatal error: all goroutines are asleep - deadlock!
+               channel在协程中读写成对的，go底层会阻塞
+               底层会检测 channel的读写操作
+        channel的注意事项：
+            1、channel可以声明为只读，或者只写性质
+            2、使用select可以解决从channel取数据的阻塞问题
+            3、goroutine中使用recover,解决协程中出现panic，导致程序奔溃问题
+---------------------------------------------------------------------------------------------
+Go反射：
+    使用场景：
+        1、框架使用场景
+        2、编写适配器
+    基本介绍：
+        1、反射可以在运行时动态获取变量的各种信息，比如：变量的类型，类别
+        2、如果是结构体变量，可以获取到结构体本身的各种信息(结构体字段，方法)
+        3、通过反射，可以修改变量的值，可以调用关联的方法
+        4、使用反射，import "reflect"
+         package reflect
+         reflect实现了运行时的反射，允许程序操作任何类型的对象，典型用法是静态类型interface{}保存一个值，通过调用 TypeOf获取起动态类型的信息
+         该函数返回一个Type类型值，调用ValueOf函数返回一个Value类型值，该值代表运行时的数据，Zero接受一个Type类型参数并返回一个代表该类型零值的Value的类型值
+         reflect.Type + reflect.Value
+    反射的重要概念和函数：
+        1、reflect.TypeOf(变量名)，获取变量的类型，返回reflect.Type类型，reflect.Type是一个interface
+        2、reflect.ValueOf(变量名)，获取变量的值，返回reflect.Value类型，reflect.value是一个结构体类型
+        3、变量、interface{} 和 reflect.Value是可以相互转换的
+    反射的注意细节：
+        1、reflect.Value.Kind,获取变量的类别，返回的是一个常量
+        2、Type是类型，Kind是类别，Type 和 kind可能是相同的，也可能是不同的， Kind表示Type的分类
+            var stu Student type:pkg.Student, kind:struct
+        3、通过反射可以在让 变量在interface{}和reflect.Value之间互相转换
+            变量 <-----> interface{} <--------> reflect.Value
+        4、使用反射的方式来获取变量的值(并返回对应的值)，要求数据类型匹配，比如x是int,那么就应该使用reflect.ValueOf(x).Int() int64
+        5、通过反射来修改变量，使用SetXxx方法来设置需要通过对应的指针类型来完成，这样才能改变传入的变量，同时需要使用reflect.Value.Elem()方法
+            reflect.Value.Elem().setXxx(value)   setXxx必须是指针的使用
+        6、reflect.Value.Elem()
+            反射的方法：使用方法名称的自然排序
+------------------------------------------------------------------------------------------------------------------------------
+Go的网络编程：
+    网络编程：TCP编程：
+    B/S结构的HTTP协议编程：
+    端口：0是保留端口  1-1024是固定端口：又叫有名端口，被某些程序固定使用，一般程序员不实用  1025-65535是动态端口，程序员可以使用
+        1、端口尽可能少开，一个端口只能一个程序使用
+    网络编程的package: net
+
+------------------------------------------------------------------------------------------------------------------
+redis:
+    Remote Dictionary System
+    Redis Value的最大值 512值
+    set/mset
+    hset/hget/hgetall/hdel
+    list本质是一个链表，是有序的
+    lpush rpush lrange lpop rpop del / lindex / llen key
+    set 底层是HashTable数据结构
+----------------------------------------------------------------------------------------------------------------
+model方式的go程序，安装依赖
+    go get: 安转依赖管理，取出了编译和可执行文件安转 影响go.mod 依赖管理
+    go install: 可以编译安装可执行问及爱你， 不影响 go.mod 文件
+
+    GoPath的问题：没有版本的概念，会造成依赖管理的问题
+
+
+----------------------------------------------------------------------------------------------------------------
+代码的分层和缓存：
+
+
+
+
+
+

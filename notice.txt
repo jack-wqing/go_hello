@@ -1,0 +1,23 @@
+1、Go 1.13 -> 默认开启 Go Module管理依赖的方式，开启Go module模块支持后，并不能与$GOPATH共存,所以把项目从$GOPATH中移出或者不要使用Go module模块即可
+
+2、Go l.15 -> Go 语言运行时 func main函数必须要在名为main的package下
+
+3、一个package中 只能有一个main函数
+
+4、多个包的导入 使用 import()的方式，多个全局变量的声明 也使用 var()的方式
+
+5、Go语言采用 UTF-8编码： UTF-8是unicode码的实现 英文字母是1byte  汉字3byte 字符可以进行运算，因为本质是unicode编码，运算是码值的运算
+
+6、类型推断 + 显示转换
+
+7、Go sdk安装mac应该使用 : go1.19.4.darwin-arm64.tar.gz-Archive-macOS-ARM64 对应 goland的版本否则debug将不能运行
+
+8、计算机中运算都是 补码 进行运算的
+
+9、Go 基本规则严格的格式，大括号 else 不能直接换行写会自动加";" 所以要注意行语句的结束方式
+
+10、对Map的并发操作：出现 concurrent map writes  可以加 go build -race来检测
+
+
+
+
